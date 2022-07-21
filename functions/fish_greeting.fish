@@ -19,8 +19,8 @@ function fish_greeting -d "Greeting message on shell session start up"
     echo -en "  /  |  |  |  \   " (show_mem_info) "\n"
     echo -en "  |,-'--|--'-.|   " (show_net_info) "\n"
     echo ""
-    set_color grey
-    echo "Have a nice trip"
+    set_color brcyan
+    echo "Have a nice trip!"
     set_color normal
 end
 
@@ -81,15 +81,15 @@ function show_cpu_info -d "Prints iformation about cpu"
 
         set --local procs_n (grep -c "^processor" /proc/cpuinfo)
         set --local cores_n (grep "cpu cores" /proc/cpuinfo | head -1 | cut -d ":"  -f2 | tr -d " ")
-        set --local cpu_type (grep "model name" /proc/cpuinfo | head -1 | cut -d ":" -f2)
-        set cpu_info "$procs_n processors, $cores_n cores, $cpu_type"
+        set --local cpu_type (grep "model name" /proc/cpuinfo | head -1 | cut -d ":" -f2 | tr -s ' ')
+        set cpu_info "$procs_n p, $cores_n c,$cpu_type"
 
     else if [ "$os_type" = "Darwin" ]
 
         set --local procs_n (system_profiler SPHardwareDataType | grep "Number of Processors" | cut -d ":" -f2 | tr -d " ")
         set --local cores_n (system_profiler SPHardwareDataType | grep "Cores" | cut -d ":" -f2 | tr -d " ")
         set --local cpu_type (system_profiler SPHardwareDataType | grep "Processor Name" | cut -d ":" -f2 | tr -d " ")
-        set cpu_info "$procs_n processors, $cores_n cores, $cpu_type"
+        set cpu_info "$procs_n proc, $cores_n cores, $cpu_type"
     end
 
     set_color yellow
@@ -106,7 +106,7 @@ function show_mem_info -d "Prints memory information"
     set --local total_memory ""
 
     if [ "$os_type" = "Linux" ]
-        set total_memory (free -h | grep "Mem" | cut -d " " -f 12)
+        set total_memory (free -h | grep "Mem" | cut -d " " -f 11)
 
     else if [ "$os_type" = "Darwin" ]
         set total_memory (system_profiler SPHardwareDataType | grep "Memory:" | cut -d ":" -f 2 | tr -d " ")
@@ -138,7 +138,7 @@ function show_net_info -d "Prints information about network"
     set_color yellow
     echo -en "\tNet: "
     set_color green  # green
-    echo -en "Ip address $ip, default gateway $gw"
+    echo -en "Ip address $ip, gateway $gw"
     set_color normal
 end
 

@@ -1,7 +1,7 @@
 function now
     set --local DateColumn 34
     set --local TimeColumn 61
-    curl "wttr.in/Tamshui?0" --silent --max-time 3 | read -z aWeather
+    curl "wttr.in/Taipei?0" --silent --max-time 3 | read -z aWeather
     if string match -q "Weather report*" $aWeather
         echo $aWeather
     else
@@ -9,7 +9,7 @@ function now
         echo "| Weather unavailable now!!! |"
         echo "| Check reason with command: |"
         echo "|                            |"
-        echo "| curl \"wttr.in/Tamshui?0\"   |" # Replace Edmonton with your city
+        echo "|  curl \"wttr.in/Taipei?0\"   |" # Replace Edmonton with your city
         echo "|   --silent --max-time 3    |"
         echo "+============================+"
         echo " "
