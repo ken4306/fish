@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # setup and alias for emacs
 
 #alias emacs="/usr/bin/env XLIB_SKIP_ARGB_VISUALS=1 emacs26"
