@@ -71,7 +71,7 @@ function prompt_vi_mode -d 'vi mode status indicator'
         set_color -b $color_vi_mode_visual $color_vi_mode_indicator
         echo " V "
       case '*'
-        set -l mode (fish_cursor_name_to_code "box_blinking")
+        set -l mode (fish_cursor_name_to_code "underline_blinking")
         echo -e "\e[\x3$mode q"
         set_color cyan
         echo "$right_segment_separator"
