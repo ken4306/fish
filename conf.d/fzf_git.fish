@@ -26,3 +26,7 @@ function fzum -d "View all unmerged commits across all local branches"
   git branch --no-merged master --format "%(refname:short)" | fzf --no-sort --reverse --tiebreak=index --no-multi \
     --ansi --preview="$viewUnmergedCommits"
 end
+
+function fdiff -d "Fuzz-find and show diff"
+    git diff --name-only HEAD | fzf | read -l result; and git diff HEAD (git rev-parse --show-toplevel)/$result
+end
